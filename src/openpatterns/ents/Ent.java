@@ -1,6 +1,7 @@
         /*
         The Ents database library provides access to a Taxonomical Hierarchy.
         Copyright (C) 2016  Jason Stockwell
+        www.openpatterns.net/#ents
 
         This program is free software: you can redistribute it and/or modify
         it under the terms of the GNU General Public License as published by
