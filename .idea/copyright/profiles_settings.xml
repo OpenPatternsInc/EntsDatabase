@@ -1,0 +1,15 @@
+<component name="CopyrightManager">
+  <settings default="">
+    <module2copyright>
+      <element module="Ents GUI Explorer" copyright="Ents GUI Explorer" />
+      <element module="Ents CLI Explorer" copyright="Ents CLI Explorer" />
+      <element module="Ents Related Projects" copyright="Ents Related Projects" />
+      <element module="OpenPatterns" copyright="OpenPatterns" />
+      <element module="Ents Database" copyright="Ents Database Library" />
+    </module2copyright>
+    <LanguageOptions name="__TEMPLATE__">
+      <option name="separateBefore" value="true" />
+      <option name="separateAfter" value="true" />
+    </LanguageOptions>
+  </settings>
+</component>

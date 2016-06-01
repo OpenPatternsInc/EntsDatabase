@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Ents CLI Explorer" pattern="src:net.openpatterns.ents.cli_explorer.*" />
+</component>

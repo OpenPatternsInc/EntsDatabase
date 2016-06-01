@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Ents GUI Explorer" pattern="src:net.openpatterns.ents.gui.*||src:net.openpatterns.ents.gui..*" />
+</component>
