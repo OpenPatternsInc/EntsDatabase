@@ -271,7 +271,7 @@ public class Database {
     /**
      * @return The map of unique names to Ent objects.
      */
-    Map<String, Ent> getNameMap() {
+    public Map<String, Ent> getNameMap() {
         return nameMap;
     }
 

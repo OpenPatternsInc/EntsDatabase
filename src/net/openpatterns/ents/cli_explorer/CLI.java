@@ -1,22 +1,21 @@
-/*******************************************************************************
- * The CLI Ents Explorer helps you alter and view an
- * Ents Database Hierarchy from the command line.
- * Copyright (c) 2016. Jason Stockwell and OpenPatterns Inc.
- * www.openpatterns.net/#ents
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+/*
+The Ents database library provides access to a Taxonomical Hierarchy.
+Copyright (C) 2016  Jason Stockwell
+www.openpatterns.net/#ents
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 package net.openpatterns.ents.cli_explorer;
 
@@ -26,21 +25,16 @@ import net.openpatterns.ents.database_library.Ent;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * <p>This is a class which uses a Scanner to make a command line interface
+/**<p>This is a class which uses a Scanner to make a command line interface
  * in order to edit an Ents database.</p>
- * <p>You can just ignore this for now. A GUI is much better for this
- * type of thing until it is better developed.</p>
  * <p>You can use it to add new Ents, change their names, set children and
  * parents, or analyze the tree, etc.</p>
  * <h1>Usage</h1>
  * <p>Type command and hit enter key.</p>
- */
-class CLI {
+ * */
+public class CLI {
 
-    /**
-     * The shared Data class holding info for the current Ents database.
-     */
+    /** The shared Data class holding info for the current Ents database.*/
     private Database data;
 
     private Scanner scanner;
@@ -51,9 +45,7 @@ class CLI {
         init();
     }
 
-    /**
-     * Initializes the command functions and waits for input.
-     */
+    /**Initializes the command functions and waits for input.*/
     private void init() {
         generalInput();
     }
@@ -70,7 +62,7 @@ class CLI {
             displayHelp();
         }
         //after checks for commands, see if the command is an ent's name
-        else if (data.doesEntExist(text)) {
+        else if (data.getNameMap().containsKey(text)) {
             //name found, lets open the entEditor
             entEditor(text);
         }
@@ -89,7 +81,7 @@ class CLI {
      * <p>You will see the command prompt as "name>"</p>
      */
     private void entEditor(String name) {
-        Ent ent = data.getEntByName(name);
+        Ent ent = data.getNameMap().get(name);
         System.out.print("\n" + name + "> ");
         String command = scanner.nextLine();
         if (command.equals("exit")) {
@@ -110,7 +102,7 @@ class CLI {
             ArrayList<Ent> children = ent.getChildren();
             if (children != null && children.size() > 0) {
                 System.out.println("Direct children:");
-                for (Ent e : children) {
+                for (Ent e: children) {
                     System.out.println('\t' + e.getName());
                 }
             } else {
@@ -124,7 +116,7 @@ class CLI {
             ArrayList<Ent> parents = ent.getParents();
             if (parents != null && parents.size() > 0) {
                 System.out.println("Direct parents:");
-                for (Ent e : parents) {
+                for (Ent e: parents) {
                     System.out.println('\t' + e.getName());
                 }
             } else {
@@ -137,7 +129,7 @@ class CLI {
             //ok so we will ask for the name of the child to add.
             System.out.print("Child's name: ");
             String child = scanner.nextLine();
-            String result = ent.addChild(data.getEntByName(child));
+            String result = ent.addChild(data.getNameMap().get(child));
             if (result.equals("success")) {
                 System.out.println("Added.");
             } else {
@@ -150,7 +142,7 @@ class CLI {
             //ok so we will ask for the name of the parent to add.
             System.out.print("Parent's name: ");
             String parent = scanner.nextLine();
-            String result = ent.addParent(data.getEntByName(parent));
+            String result = ent.addParent(data.getNameMap().get(parent));
             if (result.equals("success")) {
                 System.out.println("Added.");
             } else {
@@ -163,14 +155,14 @@ class CLI {
             System.out.print("Child's name: ");
             String child = scanner.nextLine();
             //is this a valid ent?
-            Ent c = data.getEntByName(child);
+            Ent c = data.getNameMap().get(child);
             if (c == null) {
                 System.out.println("No Ent with that name exists.");
                 entEditor(name);
             } else if (ent.getChildren().contains(c)) {
                 //confirm removal just in case
                 if (confirm()) {
-                    String result = ent.removeChild(data.getEntByName(child));
+                    String result = ent.removeChild(data.getNameMap().get(child));
                     if (result.equals("success"))
                         System.out.println("Removed.");
                     else
@@ -190,14 +182,14 @@ class CLI {
             System.out.print("Parent's name: ");
             String parent = scanner.nextLine();
             //is this a valid ent?
-            Ent p = data.getEntByName(parent);
+            Ent p = data.getNameMap().get(parent);
             if (p == null) {
                 System.out.println("No Ent with that name exists.");
                 entEditor(name);
             } else if (ent.getParents().contains(p)) {
                 //confirm removal just in case
                 if (confirm()) {
-                    String result = ent.removeParent(data.getEntByName(parent));
+                    String result = ent.removeParent(data.getNameMap().get(parent));
                     if (result.equals("success"))
                         System.out.println("Removed.");
                     else
@@ -215,9 +207,7 @@ class CLI {
 
     }
 
-    /**
-     * Dialog to do with removing an Ent from the database. Should main tree consistency and stuff, but not yet.
-     */
+    /** Dialog to do with removing an Ent from the database. Should main tree consistency and stuff, but not yet. */
     private int handleEntRemoval(String name) {
         if (confirm()) {
             //well, they're pretty sure about it...
@@ -235,6 +225,8 @@ class CLI {
         }
         System.out.println("Strange error... \"" + name + "\" was not removed...");
         return 0;
+
+
 
 
     }
@@ -270,9 +262,7 @@ class CLI {
     }
 
 
-    /**
-     * Asks "Confirm? y/n" and only the response of "y" returns true.
-     */
+    /** Asks "Comfirm? y/n" and only the response of "y" returns true. */
     private boolean confirm() {
         System.out.print("Confirm? y/n: ");
         if (scanner.nextLine().equals("y"))
