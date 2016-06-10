@@ -28,8 +28,7 @@ import java.util.Random;
 
 /**
  * <p>This class holds the various data like lists of Ents.</p>
- * <p>It is sent around so that all classes that need to access
- * it can</p>
+ * <p>It is sent around to all classes that need access to the hierarchy it represents.</p>
  */
 public class Database {
 
