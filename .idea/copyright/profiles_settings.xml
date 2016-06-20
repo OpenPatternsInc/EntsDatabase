@@ -6,6 +6,7 @@
       <element module="Ents Related Projects" copyright="Ents Related Projects" />
       <element module="OpenPatterns" copyright="OpenPatterns" />
       <element module="Ents Database" copyright="Ents Database Library" />
+      <element module="Ents Util" copyright="Ents Util" />
     </module2copyright>
     <LanguageOptions name="__TEMPLATE__">
       <option name="separateBefore" value="true" />

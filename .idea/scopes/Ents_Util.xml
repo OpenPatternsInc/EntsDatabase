@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Ents Util" pattern="src:net.openpatterns.ents.Util..*" />
+</component>
